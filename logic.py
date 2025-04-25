@@ -1,5 +1,8 @@
 from PyQt6.QtWidgets import *
+
+import popup_gui
 from gui import *
+from popup_gui import *
 import csv
 import random
 
@@ -160,11 +163,13 @@ class Logic(QMainWindow, Ui_MainWindow):
         #TODO: data validation
         confirm_choice = self.show_confirm_popup()
 
+        print(confirm_choice)
+
         if confirm_choice == 65536:
             self.clear_fields(page)
         elif confirm_choice == 16384:
-            student_dict[student][assignment] = points
-            print(student_dict[student][assignment])
-            self.show_success_popup(student, assignment, points)
-            self.clear_fields(page)
-
+            if student in student_dict and assignment in assignment_dict:
+                student_dict[student][assignment] = points
+                print(student_dict[student][assignment])
+                success = self.show_success_popup(student, assignment, points, assignment_dict[assignment])
+                self.clear_fields(page)
