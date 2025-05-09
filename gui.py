@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QMessageBox, QInputDialog
 
 
 class Ui_MainWindow(object):

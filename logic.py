@@ -98,6 +98,8 @@ class Logic(QMainWindow, Ui_MainWindow):
 
         self.buttonGroup.buttonClicked.connect(lambda: self.update_text(self.statistics_list))
 
+        self.statistics_list.currentRowChanged.connect(lambda: self.update_text(self.statistics_list.currentRow()))
+
         self.statistics_calculate_button.clicked.connect(
             lambda: self.calculate_stats(self.buttonGroup.checkedButton().text(), self.statistics_list.currentItem().text()))
 
@@ -235,6 +237,12 @@ class Logic(QMainWindow, Ui_MainWindow):
         elif textbox == self.addremovestudent_remove_button:
             self.addremovestudent_remove_button.setEnabled(True)
 
+        elif textbox == self.statistics_list.currentRow():
+            if self.statistics_list.currentRow() >= 0:
+                self.statistics_calculate_button.setEnabled(True)
+            else:
+                self.statistics_calculate_button.setEnabled(False)
+
         elif textbox == self.statistics_list:
             error_flag = True
             for assignment in assignment_dict:
@@ -249,20 +257,17 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.assign_avg_zeros_label_2.setVisible(False)
 
             self.statistics_list.clear()
-            self.statistics_calculate_button.setEnabled(False)
 
             if self.statistics_assignment_radioButton.isChecked():
                 for assignment in assignment_dict:
                     self.statistics_list.addItem(assignment)
                 self.assign_avg_zeros_label.setVisible(True)
                 self.statistics_zeros_checkbox.setVisible(True)
-                self.statistics_list.setCurrentRow(0)
             elif self.statistics_student_radioButton.isChecked():
                 for student in student_dict:
                     self.statistics_list.addItem(student)
                 self.assign_avg_zeros_label.setVisible(True)
                 self.statistics_zeros_checkbox.setVisible(True)
-                self.statistics_list.setCurrentRow(0)
             elif self.statistics_course_radioButton.isChecked():
                 self.statistics_list.addItem('*Click Calculate*')
                 self.assign_avg_zeros_label.setVisible(False)
