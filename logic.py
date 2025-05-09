@@ -426,10 +426,15 @@ class Logic(QMainWindow, Ui_MainWindow):
                         elif assignment not in student_dict[selection]:
                             self.results_text.append(f'{assignment:.<15}{'missing':.>20}')
 
-            self.results_text.append(40*'=')
-            percent_grade = (earned/total_poss)*100
-            letter_grade = self.get_letter_grade(percent_grade)
-            self.results_text.append(f'Current Grade for {selection} - {(earned / total_poss)*100:.2f}% : {letter_grade}')
+
+            if total_poss > 0:
+                percent_grade = (earned/total_poss)*100
+                letter_grade = self.get_letter_grade(percent_grade)
+                self.results_text.append(40 * '=')
+                self.results_text.append(f'Current Grade for {selection} - {(earned / total_poss) * 100:.2f}% : {letter_grade}')
+            else:
+                self.results_text.append(f'No Grades Found for {selection}')
+
 
         elif group == 'By Assignment':
             total_score = 0
@@ -443,11 +448,14 @@ class Logic(QMainWindow, Ui_MainWindow):
                         print_string += '0/'
                     print_string += str(assignment_dict[selection])
                     self.results_text.append(f'{student:.<15}{print_string:.>20}')
+                student_count = len(student_dict)
 
             elif not self.statistics_zeros_checkbox.isChecked():
+                student_count = 0
                 for student in student_dict:
                     print_string = ''
                     if selection in student_dict[student] and student_dict[student][selection] != 'N/A':
+                        student_count += 1
                         total_score += int(student_dict[student][selection])
                         print_string += str(student_dict[student][selection]) + '/'
                         print_string += str(assignment_dict[selection])
@@ -455,7 +463,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                     else:
                         self.results_text.append(f'{student:.<15}{'missing':.>20}')
 
-            percent_avg = ((total_score/len(student_dict))/assignment_dict[selection] * 100)
+            percent_avg = ((total_score/student_count)/assignment_dict[selection] * 100)
             letter_grade = self.get_letter_grade(percent_avg)
             submission_count=0
 
