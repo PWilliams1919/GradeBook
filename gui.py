@@ -7,7 +7,6 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMessageBox, QInputDialog
 
 
 class Ui_MainWindow(object):
@@ -329,6 +328,13 @@ class Ui_MainWindow(object):
         self.statistics_course_radioButton.setGeometry(QtCore.QRect(70, 170, 101, 21))
         self.statistics_course_radioButton.setObjectName("statistics_course_radioButton")
         self.buttonGroup.addButton(self.statistics_course_radioButton)
+        self.assign_avg_zeros_label_2 = QtWidgets.QLabel(parent=self.assignment_avg_page)
+        self.assign_avg_zeros_label_2.setGeometry(QtCore.QRect(20, 330, 451, 20))
+        font = QtGui.QFont()
+        font.setBold(False)
+        font.setWeight(50)
+        self.assign_avg_zeros_label_2.setFont(font)
+        self.assign_avg_zeros_label_2.setObjectName("assign_avg_zeros_label_2")
         self.stackedWidget.addWidget(self.assignment_avg_page)
         self.results_page = QtWidgets.QWidget()
         self.results_page.setObjectName("results_page")
@@ -406,6 +412,7 @@ class Ui_MainWindow(object):
         self.statistics_student_radioButton.setText(_translate("MainWindow", "By Student"))
         self.statistics_assignment_radioButton.setText(_translate("MainWindow", "By Assignment"))
         self.statistics_course_radioButton.setText(_translate("MainWindow", "By Course"))
+        self.assign_avg_zeros_label_2.setText(_translate("MainWindow", "Error: There must be at least one assignment with at least one grade to calculate statistics."))
         self.main_menu_label_8.setText(_translate("MainWindow", "RESULTS"))
         self.results_back_button.setText(_translate("MainWindow", "Back"))
 

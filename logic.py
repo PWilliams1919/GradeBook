@@ -140,6 +140,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.statistics_list.clear()
             self.statistics_zeros_checkbox.setVisible(False)
             self.assign_avg_zeros_label.setVisible(False)
+            self.assign_avg_zeros_label_2.setVisible(False)
             self.statistics_zeros_checkbox.setChecked(False)
             self.buttonGroup.setExclusive(False)
             self.statistics_assignment_radioButton.setChecked(False)
@@ -235,6 +236,18 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.addremovestudent_remove_button.setEnabled(True)
 
         elif textbox == self.statistics_list:
+            error_flag = True
+            for assignment in assignment_dict:
+                for student in student_dict:
+                    if assignment in student_dict[student] and student_dict[student][assignment] != 'N/A':
+                        error_flag = False
+                        break
+
+            if error_flag == True:
+                self.assign_avg_zeros_label_2.setVisible(True)
+            else:
+                self.assign_avg_zeros_label_2.setVisible(False)
+
             self.statistics_list.clear()
             self.statistics_calculate_button.setEnabled(False)
 
@@ -254,8 +267,6 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.statistics_list.addItem('*Click Calculate*')
                 self.assign_avg_zeros_label.setVisible(False)
                 self.statistics_zeros_checkbox.setVisible(False)
-            if len(student_dict) > 0 and len(assignment_dict) > 0:
-                self.statistics_calculate_button.setEnabled(True)
 
     def edit_grade(self, assignment: str, student: str, points: str) -> None:
         """
