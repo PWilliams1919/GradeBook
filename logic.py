@@ -452,7 +452,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                         print_string += str(student_dict[student][selection]) + '/'
                         print_string += str(assignment_dict[selection])
                         self.results_text.append(f'{student:.<15}{print_string:.>20}')
-                    elif selection not in student_dict[student]:
+                    else:
                         self.results_text.append(f'{student:.<15}{'missing':.>20}')
 
             percent_avg = ((total_score/len(student_dict))/assignment_dict[selection] * 100)
