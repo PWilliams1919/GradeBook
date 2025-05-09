@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.splash_img = QtWidgets.QLabel(parent=self.splash_page)
         self.splash_img.setGeometry(QtCore.QRect(110, 10, 260, 200))
         self.splash_img.setText("")
-        self.splash_img.setPixmap(QtGui.QPixmap("../../../../Downloads/256px-Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"))
+        self.splash_img.setPixmap(QtGui.QPixmap("SplashPage.png"))
         self.splash_img.setObjectName("splash_img")
         self.splash_label = QtWidgets.QLabel(parent=self.splash_page)
         self.splash_label.setGeometry(QtCore.QRect(70, 220, 341, 41))

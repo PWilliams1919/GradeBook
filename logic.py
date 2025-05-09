@@ -10,7 +10,7 @@ quotes = [f'{'"Instruction does much, but encouragement everything"'}\n-Johann W
           f'{'"The foundation of every state is the education of its youth."'}\n-Diogenes',
           f'{'"Education is the most powerful weapon which you can use to change the world."'}\n- Nelson Mandela',
           f'{'"Children must be taught how to think, not what to think."'}\n-Margaret Mead',
-          f'{'"The mind is not a vessel to be filled, but a fire to be kindled.”'}\n-Plutarch',
+          f'{'"The mind is not a vessel to be filled, but a fire to be kindled."'}\n-Plutarch',
           ]
 
 assignment_dict = {}
