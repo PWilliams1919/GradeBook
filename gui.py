@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'untitled.ui'
+# Form implementation generated from reading ui file 'gradebook_gui.ui'
 #
 # Created by: PyQt6 UI code generator 6.9.0
 #
@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox, QInputDialog
 
 
 class Ui_MainWindow(object):
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.splash_img = QtWidgets.QLabel(parent=self.splash_page)
         self.splash_img.setGeometry(QtCore.QRect(110, 10, 260, 200))
         self.splash_img.setText("")
-        self.splash_img.setPixmap(QtGui.QPixmap("../../../../Downloads/256px-Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"))
+        self.splash_img.setPixmap(QtGui.QPixmap("SplashPage.png"))
         self.splash_img.setObjectName("splash_img")
         self.splash_label = QtWidgets.QLabel(parent=self.splash_page)
         self.splash_label.setGeometry(QtCore.QRect(70, 220, 341, 41))
@@ -150,7 +150,7 @@ class Ui_MainWindow(object):
         self.entereditgrade_clear_button.setGeometry(QtCore.QRect(260, 220, 75, 23))
         self.entereditgrade_clear_button.setObjectName("entereditgrade_clear_button")
         self.entereditgrade_returntomain_button = QtWidgets.QPushButton(parent=self.enter_grades_page)
-        self.entereditgrade_returntomain_button.setGeometry(QtCore.QRect(200, 250, 111, 23))
+        self.entereditgrade_returntomain_button.setGeometry(QtCore.QRect(190, 250, 131, 23))
         self.entereditgrade_returntomain_button.setObjectName("entereditgrade_returntomain_button")
         self.entereditgrade_student_dropdown = QtWidgets.QComboBox(parent=self.enter_grades_page)
         self.entereditgrade_student_dropdown.setGeometry(QtCore.QRect(230, 80, 111, 22))
@@ -181,27 +181,9 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.enter_grades_page)
         self.add_assignment_page = QtWidgets.QWidget()
         self.add_assignment_page.setObjectName("add_assignment_page")
-        self.addeditassign_name_label = QtWidgets.QLabel(parent=self.add_assignment_page)
-        self.addeditassign_name_label.setGeometry(QtCore.QRect(70, 90, 131, 16))
-        self.addeditassign_name_label.setObjectName("addeditassign_name_label")
-        self.add_assign_name_linetext = QtWidgets.QLineEdit(parent=self.add_assignment_page)
-        self.add_assign_name_linetext.setGeometry(QtCore.QRect(200, 90, 161, 20))
-        self.add_assign_name_linetext.setObjectName("add_assign_name_linetext")
-        self.addeditassign_possiblepts_label = QtWidgets.QLabel(parent=self.add_assignment_page)
-        self.addeditassign_possiblepts_label.setGeometry(QtCore.QRect(70, 130, 111, 16))
-        self.addeditassign_possiblepts_label.setObjectName("addeditassign_possiblepts_label")
-        self.add_assign_possiblepts_linetext = QtWidgets.QLineEdit(parent=self.add_assignment_page)
-        self.add_assign_possiblepts_linetext.setGeometry(QtCore.QRect(200, 130, 161, 20))
-        self.add_assign_possiblepts_linetext.setObjectName("add_assign_possiblepts_linetext")
-        self.add_assign_save_button = QtWidgets.QPushButton(parent=self.add_assignment_page)
-        self.add_assign_save_button.setGeometry(QtCore.QRect(130, 180, 75, 23))
-        self.add_assign_save_button.setObjectName("add_assign_save_button")
-        self.add_assign_clear_button = QtWidgets.QPushButton(parent=self.add_assignment_page)
-        self.add_assign_clear_button.setGeometry(QtCore.QRect(230, 180, 75, 23))
-        self.add_assign_clear_button.setObjectName("add_assign_clear_button")
-        self.add_assign_returntomain_button = QtWidgets.QPushButton(parent=self.add_assignment_page)
-        self.add_assign_returntomain_button.setGeometry(QtCore.QRect(150, 210, 131, 23))
-        self.add_assign_returntomain_button.setObjectName("add_assign_returntomain_button")
+        self.addedit_assign_returntomain_button = QtWidgets.QPushButton(parent=self.add_assignment_page)
+        self.addedit_assign_returntomain_button.setGeometry(QtCore.QRect(170, 330, 131, 23))
+        self.addedit_assign_returntomain_button.setObjectName("addedit_assign_returntomain_button")
         self.addeditassign_title = QtWidgets.QLabel(parent=self.add_assignment_page)
         self.addeditassign_title.setGeometry(QtCore.QRect(40, 30, 411, 31))
         font = QtGui.QFont()
@@ -217,26 +199,51 @@ class Ui_MainWindow(object):
         self.line_8.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_8.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_8.setObjectName("line_8")
+        self.addedit_assign_list = QtWidgets.QListWidget(parent=self.add_assignment_page)
+        self.addedit_assign_list.setGeometry(QtCore.QRect(120, 110, 251, 181))
+        font = QtGui.QFont()
+        font.setFamily("Consolas")
+        font.setPointSize(12)
+        self.addedit_assign_list.setFont(font)
+        self.addedit_assign_list.setObjectName("addedit_assign_list")
+        self.addedit_assign_edit_button = QtWidgets.QPushButton(parent=self.add_assignment_page)
+        self.addedit_assign_edit_button.setGeometry(QtCore.QRect(120, 300, 71, 23))
+        self.addedit_assign_edit_button.setObjectName("addedit_assign_edit_button")
+        self.addedit_assign_add_button = QtWidgets.QPushButton(parent=self.add_assignment_page)
+        self.addedit_assign_add_button.setGeometry(QtCore.QRect(280, 300, 101, 23))
+        self.addedit_assign_add_button.setObjectName("addedit_assign_add_button")
+        self.label = QtWidgets.QLabel(parent=self.add_assignment_page)
+        self.label.setGeometry(QtCore.QRect(120, 75, 121, 31))
+        font = QtGui.QFont()
+        font.setFamily("MS PGothic")
+        font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(parent=self.add_assignment_page)
+        self.label_2.setGeometry(QtCore.QRect(260, 80, 121, 21))
+        font = QtGui.QFont()
+        font.setFamily("MS PGothic")
+        font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.addedit_assign_del_button = QtWidgets.QPushButton(parent=self.add_assignment_page)
+        self.addedit_assign_del_button.setGeometry(QtCore.QRect(200, 300, 71, 23))
+        self.addedit_assign_del_button.setObjectName("addedit_assign_del_button")
         self.stackedWidget.addWidget(self.add_assignment_page)
         self.add_student_page = QtWidgets.QWidget()
         self.add_student_page.setObjectName("add_student_page")
-        self.addstudent_studentname_label = QtWidgets.QLabel(parent=self.add_student_page)
-        self.addstudent_studentname_label.setGeometry(QtCore.QRect(80, 110, 111, 20))
-        self.addstudent_studentname_label.setObjectName("addstudent_studentname_label")
-        self.addstudent_name_linetext = QtWidgets.QLineEdit(parent=self.add_student_page)
-        self.addstudent_name_linetext.setGeometry(QtCore.QRect(200, 110, 161, 20))
-        self.addstudent_name_linetext.setObjectName("addstudent_name_linetext")
-        self.addstudent_save_button = QtWidgets.QPushButton(parent=self.add_student_page)
-        self.addstudent_save_button.setGeometry(QtCore.QRect(150, 150, 75, 23))
-        self.addstudent_save_button.setObjectName("addstudent_save_button")
-        self.addstudent_clear_button = QtWidgets.QPushButton(parent=self.add_student_page)
-        self.addstudent_clear_button.setGeometry(QtCore.QRect(250, 150, 75, 23))
-        self.addstudent_clear_button.setObjectName("addstudent_clear_button")
-        self.addstudent_returntomain_button = QtWidgets.QPushButton(parent=self.add_student_page)
-        self.addstudent_returntomain_button.setGeometry(QtCore.QRect(180, 180, 111, 23))
-        self.addstudent_returntomain_button.setObjectName("addstudent_returntomain_button")
+        self.addremovestudent_add_button = QtWidgets.QPushButton(parent=self.add_student_page)
+        self.addremovestudent_add_button.setGeometry(QtCore.QRect(120, 290, 101, 23))
+        self.addremovestudent_add_button.setObjectName("addremovestudent_add_button")
+        self.addremove_student_returntomain_button = QtWidgets.QPushButton(parent=self.add_student_page)
+        self.addremove_student_returntomain_button.setGeometry(QtCore.QRect(180, 320, 131, 23))
+        self.addremove_student_returntomain_button.setObjectName("addremove_student_returntomain_button")
         self.main_menu_label_5 = QtWidgets.QLabel(parent=self.add_student_page)
-        self.main_menu_label_5.setGeometry(QtCore.QRect(20, 30, 421, 31))
+        self.main_menu_label_5.setGeometry(QtCore.QRect(40, 30, 411, 31))
         font = QtGui.QFont()
         font.setFamily("MS PGothic")
         font.setPointSize(24)
@@ -250,80 +257,109 @@ class Ui_MainWindow(object):
         self.line_4.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_4.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_4.setObjectName("line_4")
-        self.stackedWidget.addWidget(self.add_student_page)
-        self.remove_student_page = QtWidgets.QWidget()
-        self.remove_student_page.setObjectName("remove_student_page")
-        self.removestudent_name_label = QtWidgets.QLabel(parent=self.remove_student_page)
-        self.removestudent_name_label.setGeometry(QtCore.QRect(76, 110, 101, 20))
-        self.removestudent_name_label.setObjectName("removestudent_name_label")
-        self.removestudent_save_button = QtWidgets.QPushButton(parent=self.remove_student_page)
-        self.removestudent_save_button.setGeometry(QtCore.QRect(120, 150, 75, 23))
-        self.removestudent_save_button.setObjectName("removestudent_save_button")
-        self.removestudent_clear_button = QtWidgets.QPushButton(parent=self.remove_student_page)
-        self.removestudent_clear_button.setGeometry(QtCore.QRect(210, 150, 75, 23))
-        self.removestudent_clear_button.setObjectName("removestudent_clear_button")
-        self.removestudent_returntomain_button = QtWidgets.QPushButton(parent=self.remove_student_page)
-        self.removestudent_returntomain_button.setGeometry(QtCore.QRect(150, 180, 111, 23))
-        self.removestudent_returntomain_button.setObjectName("removestudent_returntomain_button")
-        self.removestudent_helptext_label = QtWidgets.QLabel(parent=self.remove_student_page)
-        self.removestudent_helptext_label.setGeometry(QtCore.QRect(90, 210, 231, 16))
-        self.removestudent_helptext_label.setObjectName("removestudent_helptext_label")
-        self.removestudent_name_dropdown = QtWidgets.QComboBox(parent=self.remove_student_page)
-        self.removestudent_name_dropdown.setGeometry(QtCore.QRect(200, 110, 191, 22))
-        self.removestudent_name_dropdown.setObjectName("removestudent_name_dropdown")
-        self.main_menu_label_6 = QtWidgets.QLabel(parent=self.remove_student_page)
-        self.main_menu_label_6.setGeometry(QtCore.QRect(150, 20, 191, 31))
+        self.addremovestudent_remove_button = QtWidgets.QPushButton(parent=self.add_student_page)
+        self.addremovestudent_remove_button.setGeometry(QtCore.QRect(260, 290, 111, 23))
+        self.addremovestudent_remove_button.setObjectName("addremovestudent_remove_button")
+        self.addremove_student_list = QtWidgets.QListWidget(parent=self.add_student_page)
+        self.addremove_student_list.setGeometry(QtCore.QRect(120, 100, 251, 181))
+        font = QtGui.QFont()
+        font.setFamily("Consolas")
+        font.setPointSize(12)
+        self.addremove_student_list.setFont(font)
+        self.addremove_student_list.setObjectName("addremove_student_list")
+        self.label_3 = QtWidgets.QLabel(parent=self.add_student_page)
+        self.label_3.setGeometry(QtCore.QRect(150, 70, 191, 31))
         font = QtGui.QFont()
         font.setFamily("MS PGothic")
-        font.setPointSize(16)
+        font.setPointSize(15)
         font.setBold(True)
         font.setWeight(75)
-        self.main_menu_label_6.setFont(font)
-        self.main_menu_label_6.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.main_menu_label_6.setObjectName("main_menu_label_6")
-        self.line_5 = QtWidgets.QFrame(parent=self.remove_student_page)
-        self.line_5.setGeometry(QtCore.QRect(140, 40, 211, 20))
-        self.line_5.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_5.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_5.setObjectName("line_5")
-        self.stackedWidget.addWidget(self.remove_student_page)
+        self.label_3.setFont(font)
+        self.label_3.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_3.setObjectName("label_3")
+        self.stackedWidget.addWidget(self.add_student_page)
         self.assignment_avg_page = QtWidgets.QWidget()
         self.assignment_avg_page.setObjectName("assignment_avg_page")
-        self.assign_avg_assign_label = QtWidgets.QLabel(parent=self.assignment_avg_page)
-        self.assign_avg_assign_label.setGeometry(QtCore.QRect(100, 100, 71, 16))
-        self.assign_avg_assign_label.setObjectName("assign_avg_assign_label")
-        self.assign_avg_assign_dropdown = QtWidgets.QComboBox(parent=self.assignment_avg_page)
-        self.assign_avg_assign_dropdown.setGeometry(QtCore.QRect(170, 100, 181, 22))
-        self.assign_avg_assign_dropdown.setObjectName("assign_avg_assign_dropdown")
         self.assign_avg_zeros_label = QtWidgets.QLabel(parent=self.assignment_avg_page)
-        self.assign_avg_zeros_label.setGeometry(QtCore.QRect(100, 140, 191, 16))
+        self.assign_avg_zeros_label.setGeometry(QtCore.QRect(100, 270, 191, 16))
         self.assign_avg_zeros_label.setObjectName("assign_avg_zeros_label")
-        self.assign_avg_zeros_checkbox = QtWidgets.QCheckBox(parent=self.assignment_avg_page)
-        self.assign_avg_zeros_checkbox.setGeometry(QtCore.QRect(300, 140, 70, 17))
-        self.assign_avg_zeros_checkbox.setText("")
-        self.assign_avg_zeros_checkbox.setObjectName("assign_avg_zeros_checkbox")
-        self.assign_avg_calculate_button = QtWidgets.QPushButton(parent=self.assignment_avg_page)
-        self.assign_avg_calculate_button.setGeometry(QtCore.QRect(140, 180, 75, 23))
-        self.assign_avg_calculate_button.setObjectName("assign_avg_calculate_button")
-        self.assign_avg_returntomain_button = QtWidgets.QPushButton(parent=self.assignment_avg_page)
-        self.assign_avg_returntomain_button.setGeometry(QtCore.QRect(230, 180, 121, 23))
-        self.assign_avg_returntomain_button.setObjectName("assign_avg_returntomain_button")
+        self.statistics_zeros_checkbox = QtWidgets.QCheckBox(parent=self.assignment_avg_page)
+        self.statistics_zeros_checkbox.setGeometry(QtCore.QRect(300, 270, 70, 17))
+        self.statistics_zeros_checkbox.setText("")
+        self.statistics_zeros_checkbox.setObjectName("statistics_zeros_checkbox")
+        self.statistics_calculate_button = QtWidgets.QPushButton(parent=self.assignment_avg_page)
+        self.statistics_calculate_button.setGeometry(QtCore.QRect(110, 300, 75, 23))
+        self.statistics_calculate_button.setObjectName("statistics_calculate_button")
+        self.statistics_returntomain_button = QtWidgets.QPushButton(parent=self.assignment_avg_page)
+        self.statistics_returntomain_button.setGeometry(QtCore.QRect(250, 300, 121, 23))
+        self.statistics_returntomain_button.setObjectName("statistics_returntomain_button")
         self.main_menu_label_7 = QtWidgets.QLabel(parent=self.assignment_avg_page)
-        self.main_menu_label_7.setGeometry(QtCore.QRect(110, 20, 281, 31))
+        self.main_menu_label_7.setGeometry(QtCore.QRect(100, 30, 281, 31))
         font = QtGui.QFont()
         font.setFamily("MS PGothic")
-        font.setPointSize(16)
+        font.setPointSize(24)
         font.setBold(True)
         font.setWeight(75)
         self.main_menu_label_7.setFont(font)
         self.main_menu_label_7.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.main_menu_label_7.setObjectName("main_menu_label_7")
         self.line_6 = QtWidgets.QFrame(parent=self.assignment_avg_page)
-        self.line_6.setGeometry(QtCore.QRect(120, 40, 261, 20))
+        self.line_6.setGeometry(QtCore.QRect(110, 60, 261, 20))
         self.line_6.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_6.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_6.setObjectName("line_6")
+        self.statistics_list = QtWidgets.QListWidget(parent=self.assignment_avg_page)
+        self.statistics_list.setGeometry(QtCore.QRect(200, 80, 251, 181))
+        font = QtGui.QFont()
+        font.setFamily("Consolas")
+        font.setPointSize(12)
+        self.statistics_list.setFont(font)
+        self.statistics_list.setObjectName("statistics_list")
+        self.statistics_student_radioButton = QtWidgets.QRadioButton(parent=self.assignment_avg_page)
+        self.statistics_student_radioButton.setGeometry(QtCore.QRect(70, 110, 82, 21))
+        self.statistics_student_radioButton.setObjectName("statistics_student_radioButton")
+        self.buttonGroup = QtWidgets.QButtonGroup(MainWindow)
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.buttonGroup.addButton(self.statistics_student_radioButton)
+        self.statistics_assignment_radioButton = QtWidgets.QRadioButton(parent=self.assignment_avg_page)
+        self.statistics_assignment_radioButton.setGeometry(QtCore.QRect(70, 140, 101, 21))
+        self.statistics_assignment_radioButton.setObjectName("statistics_assignment_radioButton")
+        self.buttonGroup.addButton(self.statistics_assignment_radioButton)
+        self.statistics_course_radioButton = QtWidgets.QRadioButton(parent=self.assignment_avg_page)
+        self.statistics_course_radioButton.setGeometry(QtCore.QRect(70, 170, 101, 21))
+        self.statistics_course_radioButton.setObjectName("statistics_course_radioButton")
+        self.buttonGroup.addButton(self.statistics_course_radioButton)
+        self.assign_avg_zeros_label_2 = QtWidgets.QLabel(parent=self.assignment_avg_page)
+        self.assign_avg_zeros_label_2.setGeometry(QtCore.QRect(20, 330, 451, 20))
+        font = QtGui.QFont()
+        font.setBold(False)
+        font.setWeight(50)
+        self.assign_avg_zeros_label_2.setFont(font)
+        self.assign_avg_zeros_label_2.setObjectName("assign_avg_zeros_label_2")
         self.stackedWidget.addWidget(self.assignment_avg_page)
+        self.results_page = QtWidgets.QWidget()
+        self.results_page.setObjectName("results_page")
+        self.main_menu_label_8 = QtWidgets.QLabel(parent=self.results_page)
+        self.main_menu_label_8.setGeometry(QtCore.QRect(100, 10, 281, 41))
+        font = QtGui.QFont()
+        font.setFamily("MS PGothic")
+        font.setPointSize(24)
+        font.setBold(True)
+        font.setWeight(75)
+        self.main_menu_label_8.setFont(font)
+        self.main_menu_label_8.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.main_menu_label_8.setObjectName("main_menu_label_8")
+        self.results_text = QtWidgets.QTextBrowser(parent=self.results_page)
+        self.results_text.setGeometry(QtCore.QRect(40, 80, 401, 231))
+        font = QtGui.QFont()
+        font.setFamily("Consolas")
+        font.setPointSize(12)
+        self.results_text.setFont(font)
+        self.results_text.setObjectName("results_text")
+        self.results_back_button = QtWidgets.QPushButton(parent=self.results_page)
+        self.results_back_button.setGeometry(QtCore.QRect(210, 320, 75, 23))
+        self.results_back_button.setObjectName("results_back_button")
+        self.stackedWidget.addWidget(self.results_page)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 480, 21))
@@ -358,41 +394,138 @@ class Ui_MainWindow(object):
         self.entereditgrade_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
         self.entereditgrade_totalpts_label.setText(_translate("MainWindow", "N/A"))
         self.entereditgrade_title.setText(_translate("MainWindow", "ENTER/EDIT GRADES"))
-        self.addeditassign_name_label.setText(_translate("MainWindow", "New Assignment Name:"))
-        self.addeditassign_possiblepts_label.setText(_translate("MainWindow", "Total Possible Points:"))
-        self.add_assign_save_button.setText(_translate("MainWindow", "Save"))
-        self.add_assign_clear_button.setText(_translate("MainWindow", "Clear"))
-        self.add_assign_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
+        self.addedit_assign_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
         self.addeditassign_title.setText(_translate("MainWindow", "ADD/EDIT ASSIGNMENT"))
-        self.addstudent_studentname_label.setText(_translate("MainWindow", "New Student Name: "))
-        self.addstudent_save_button.setText(_translate("MainWindow", "Save"))
-        self.addstudent_clear_button.setText(_translate("MainWindow", "Clear"))
-        self.addstudent_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
+        self.addedit_assign_edit_button.setText(_translate("MainWindow", "Edit"))
+        self.addedit_assign_add_button.setText(_translate("MainWindow", "Add Assignment"))
+        self.label.setText(_translate("MainWindow", "Assignment"))
+        self.label_2.setText(_translate("MainWindow", "Point Total"))
+        self.addedit_assign_del_button.setText(_translate("MainWindow", "Delete"))
+        self.addremovestudent_add_button.setText(_translate("MainWindow", "Add Student"))
+        self.addremove_student_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
         self.main_menu_label_5.setText(_translate("MainWindow", "ADD/REMOVE STUDENT"))
-        self.removestudent_name_label.setText(_translate("MainWindow", "Student to Remove: "))
-        self.removestudent_save_button.setText(_translate("MainWindow", "Save"))
-        self.removestudent_clear_button.setText(_translate("MainWindow", "Clear"))
-        self.removestudent_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
-        self.removestudent_helptext_label.setText(_translate("MainWindow", "Please Note: This action can not be undone."))
-        self.main_menu_label_6.setText(_translate("MainWindow", "REMOVE STUDENT"))
-        self.assign_avg_assign_label.setText(_translate("MainWindow", "Assignment:"))
+        self.addremovestudent_remove_button.setText(_translate("MainWindow", "Remove Student"))
+        self.label_3.setText(_translate("MainWindow", "Current Students"))
         self.assign_avg_zeros_label.setText(_translate("MainWindow", "Include missing assignments as zeros?"))
-        self.assign_avg_calculate_button.setText(_translate("MainWindow", "Calculate"))
-        self.assign_avg_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
+        self.statistics_calculate_button.setText(_translate("MainWindow", "Calculate"))
+        self.statistics_returntomain_button.setText(_translate("MainWindow", "Return to Main Menu"))
         self.main_menu_label_7.setText(_translate("MainWindow", "STATISTICS"))
+        self.statistics_student_radioButton.setText(_translate("MainWindow", "By Student"))
+        self.statistics_assignment_radioButton.setText(_translate("MainWindow", "By Assignment"))
+        self.statistics_course_radioButton.setText(_translate("MainWindow", "By Course"))
+        self.assign_avg_zeros_label_2.setText(_translate("MainWindow", "Error: There must be at least one assignment with at least one grade to calculate statistics."))
+        self.main_menu_label_8.setText(_translate("MainWindow", "RESULTS"))
+        self.results_back_button.setText(_translate("MainWindow", "Back"))
 
-    def show_confirm_popup(self):
+    def show_confirm_popup(self) -> int:
+        """
+        Display popup that allows user to confirm or cancel a selected operation.
+        :return: integer representation of user choice (Yes=16384, No=65536)
+        """
         msg = QMessageBox()
         msg.setWindowTitle('Confirm Changes')
         msg.setText('Save Changes?')
-        msg.setStandardButtons(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No)
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
 
         return msg.exec()
 
-    def show_success_popup(self, student, assignment, new_score, pts_possible):
+    def show_success_popup(self) -> None:
+        """
+        Displays popup informing user that operation processed successfully.
+        :return: None
+        """
         msg = QMessageBox()
         msg.setWindowTitle('Changes Saved')
-        msg.setText(f'{student}: {new_score}/{pts_possible} ({(int(new_score)/int(pts_possible))*100:.2f}%) for {assignment}')
+        msg.setText(f'Changes saved successfully!')
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
+
+    def show_studentexists_popup(self) -> None:
+        """
+        Displays popup informing user that the submitted student name already exists in student_dict.
+        :return: None
+        """
+        msg = QMessageBox()
+        msg.setWindowTitle('Error')
+        msg.setText(f'Student name already in use. Please try again.')
+        msg.setIcon(QMessageBox.Icon.Warning)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
+
+    def show_editassignment_popup(self) -> int:
+        """
+        Displays popup to capture and return new point total for existing assignment.
+        :return: New point total for assignment
+        """
+        score, ok = QInputDialog().getInt(self, 'Edit Assignment', 'New Point Total:', min=1)
+        if score and ok:
+            return int(score)
+        else:
+            return -1
+
+    def show_addassignmentname_popup(self) -> str:
+        """
+        Displays popup to return name of new assignment to be added.
+        :return: Name of new assignment.
+        """
+        name, ok = QInputDialog().getText(self, 'Add Assignment', 'New Assignment Name:')
+        if name and ok:
+            return str(name).strip()
+        else:
+            return ''
+
+    def show_addassignmentscore_popup(self, assignment: str) -> int:
+        """
+        Displays popup to capture and return point total for a new assignment.
+        :param assignment: Name of new assignment
+        :return: Point total of new assignment as integer
+        """
+        score, ok = QInputDialog().getInt(self, 'Add Assignment', f'Maximum score for {assignment}', min=1)
+        if score and ok:
+            return int(score)
+        else:
+            return -1
+
+    def show_addstudent_popup(self) -> str:
+        """
+        Displays popup to capture and return name of new student and validates that text is alphabetical only.
+        :return: Name of new student
+        """
+        name, ok = QInputDialog().getText(self, 'Add Student', 'New Student Name:')
+        if name.isalpha() and ok:
+            return name.strip()
+        elif not name.isalpha():
+            self.show_error_popup(2)
+            return ''
+        else:
+            return ''
+
+    def show_assignmentexists_popup(self) -> None:
+        """
+        Displays popup informing user that the entered name for a new assignment already exists.
+        :return: None
+        """
+        msg = QMessageBox()
+        msg.setWindowTitle('Error')
+        msg.setText(f'Assignment name already in use. Please try again.')
+        msg.setIcon(QMessageBox.Icon.Warning)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
+
+    def show_error_popup(self, error_code: int):
+        """
+        Displays customized error popup based on error_code parameter
+        :param error_code: Code related to specific error that was encountered.
+        :return: None
+        """
+        msg = QMessageBox()
+        msg.setWindowTitle('Error')
+        if error_code == 1:
+            msg.setText(f'Score must be an integer. Please try again.')
+        elif error_code == 2:
+            msg.setText(f'Name cannot contain number, spaces, or special characters. Please try again.')
+        msg.setIcon(QMessageBox.Icon.Warning)
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg.exec()
 
