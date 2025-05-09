@@ -98,10 +98,10 @@ class Logic(QMainWindow, Ui_MainWindow):
 
         self.buttonGroup.buttonClicked.connect(lambda: self.update_text(self.statistics_list))
 
-        self.statistics_list.currentRowChanged.connect(lambda: self.update_text(self.statistics_list.currentRow()))
+        self.statistics_list.clicked.connect(lambda: self.update_text(self.statistics_list.currentRow()))
 
         self.statistics_calculate_button.clicked.connect(
-            lambda: self.calculate_stats(self.buttonGroup.checkedButton().text(), self.statistics_list.currentItem().text()))
+            lambda: self.calculate_stats(self.buttonGroup.checkedButton().text()))
 
         #Results page
         self.results_back_button.clicked.connect(lambda: self.goto_page('Course Statistics'))
@@ -244,6 +244,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.statistics_calculate_button.setEnabled(False)
 
         elif textbox == self.statistics_list:
+            self.statistics_calculate_button.setEnabled(False)
             error_flag = True
             for assignment in assignment_dict:
                 for student in student_dict:
@@ -270,8 +271,10 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.statistics_zeros_checkbox.setVisible(True)
             elif self.statistics_course_radioButton.isChecked():
                 self.statistics_list.addItem('*Click Calculate*')
+                self.statistics_list.setCurrentRow(0)
                 self.assign_avg_zeros_label.setVisible(False)
                 self.statistics_zeros_checkbox.setVisible(False)
+                self.statistics_calculate_button.setEnabled(True)
 
     def edit_grade(self, assignment: str, student: str, points: str) -> None:
         """
@@ -382,7 +385,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             del student_dict[student]
             self.update_text(self.addremove_student_list)
 
-    def calculate_stats(self, group: str, selection: str) -> None:
+    def calculate_stats(self, group: str) -> None:
         """
         Displays averages of either a single assignment, single student, or the entire course based on user selection.
         :param group: Radio button selection (Assignment, Student, or Course)
@@ -391,7 +394,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         self.stackedWidget.setCurrentIndex(6)
         self.results_text.clear()
-
+        selection = self.statistics_list.currentItem().text()
         total_poss = 0
         earned = 0
 
@@ -423,10 +426,15 @@ class Logic(QMainWindow, Ui_MainWindow):
                         elif assignment not in student_dict[selection]:
                             self.results_text.append(f'{assignment:.<15}{'missing':.>20}')
 
-            self.results_text.append(40*'=')
-            percent_grade = (earned/total_poss)*100
-            letter_grade = self.get_letter_grade(percent_grade)
-            self.results_text.append(f'Current Grade for {selection} - {(earned / total_poss)*100:.2f}% : {letter_grade}')
+
+            if total_poss > 0:
+                percent_grade = (earned/total_poss)*100
+                letter_grade = self.get_letter_grade(percent_grade)
+                self.results_text.append(40 * '=')
+                self.results_text.append(f'Current Grade for {selection} - {(earned / total_poss) * 100:.2f}% : {letter_grade}')
+            else:
+                self.results_text.append(f'No Grades Found for {selection}')
+
 
         elif group == 'By Assignment':
             total_score = 0
@@ -440,19 +448,22 @@ class Logic(QMainWindow, Ui_MainWindow):
                         print_string += '0/'
                     print_string += str(assignment_dict[selection])
                     self.results_text.append(f'{student:.<15}{print_string:.>20}')
+                student_count = len(student_dict)
 
             elif not self.statistics_zeros_checkbox.isChecked():
+                student_count = 0
                 for student in student_dict:
                     print_string = ''
                     if selection in student_dict[student] and student_dict[student][selection] != 'N/A':
+                        student_count += 1
                         total_score += int(student_dict[student][selection])
                         print_string += str(student_dict[student][selection]) + '/'
                         print_string += str(assignment_dict[selection])
                         self.results_text.append(f'{student:.<15}{print_string:.>20}')
-                    elif selection not in student_dict[student]:
+                    else:
                         self.results_text.append(f'{student:.<15}{'missing':.>20}')
 
-            percent_avg = ((total_score/len(student_dict))/assignment_dict[selection] * 100)
+            percent_avg = ((total_score/student_count)/assignment_dict[selection] * 100)
             letter_grade = self.get_letter_grade(percent_avg)
             submission_count=0
 
@@ -476,15 +487,17 @@ class Logic(QMainWindow, Ui_MainWindow):
                 print_string = ''
                 total_score = 0
                 for student in student_dict:
-                    total_score += student_dict[student][assignment]
+                    if student_dict[student][assignment] != 'N/A':
+                        total_score += student_dict[student][assignment]
                 avg = total_score/len(student_dict)
                 print_string += str(f'{avg:.2f}') + '/' + str(f'{assignment_dict[assignment]}')
                 course_total += total_score
-                self.results_text.append(f'Avg. for {assignment:.<15}{print_string:.>20}')
+                self.results_text.append(f'Avg. for {assignment:.<15}{print_string:.>15}')
 
             for student in student_dict:
                 for assignment in assignment_dict:
-                    total_possible += student_dict[student][assignment]
+                    if student_dict[student][assignment] != 'N/A':
+                        total_possible += student_dict[student][assignment]
 
             self.results_text.append(40*'=')
             self.results_text.append(f'Overall Course Average - {course_total/total_possible*100:.2f} : {self.get_letter_grade(course_total/total_possible*100)}')
